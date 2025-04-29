@@ -6,7 +6,7 @@ Cada pasta ou arquivo HTML na raiz (quando aplicável) representa um teste ou ex
 
 ## Exemplos Incluídos
 
-* **Calculadora de Consumo de Energia** ([Abrir no Navegador](calculadora.html)) * Uma calculadora simples utilizando um slider para simular o custo mensal de energia com base no consumo (80 a 800 kWh), a um custo fixo de R$ 0,64/kWh. Estilizada com base em um Design System ([Kaizen DS](https://designsystem.ofabio.com.br)).
+* **Calculadora de Consumo de Energia** ([Abrir no Navegador](https://app.ofabio.com.br)) * Uma calculadora simples utilizando um slider para simular o custo mensal de energia com base no consumo (80 a 800 kWh), a um custo fixo de R$ 0,64/kWh. Estilizada com base em um Design System ([Kaizen DS](https://designsystem.ofabio.com.br)).
     * Tecnologias: HTML, CSS, JavaScript.
 
 * [Nome do Próximo Teste] * [Descrição breve do teste/exemplo]
