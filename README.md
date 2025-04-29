@@ -1,55 +1,48 @@
-# Kaizen Design System
+# Repositório de Testes e Exemplos Web
 
-![GitHub repo size](https://img.shields.io/github/repo-size/faaaabio/design-system)
-![GitHub last commit](https://img.shields.io/github/last-commit/faaaabio/design-system)
-![GitHub contributors](https://img.shields.io/github/contributors/faaaabio/design-system)
-[![Version](https://img.shields.io/badge/version-V_ATUAL-blue)]()[SEU_LINK_PARA_TAG_DE_VERSAO_SE_EXISTIR] [![License](https://img.shields.io/badge/license-[LICENCA]-blue)]([LINK_PARA_O_ARQUIVO_DE_LICENCA]) ## Descrição
+Este repositório serve como um espaço para experimentação (`sandbox`) e armazenamento de pequenos projetos, snippets de código e testes focados em desenvolvimento web (HTML, CSS, JavaScript).
 
-Este repositório contém a documentação e o guia de estilos vivo (`living style guide`) para o **Kaizen Design System**, desenvolvido para o site [oFabio.com.br](https://www.ofabio.com.br).
+Cada pasta ou arquivo HTML na raiz (quando aplicável) representa um teste ou exemplo específico.
 
-O objetivo do Design System Kaizen é garantir **consistência visual e de experiência**, **acelerar o desenvolvimento** e **facilitar a manutenção** do site, fornecendo uma fonte única de verdade para os elementos de UI (Interface do Usuário) e padrões de design.
+## Exemplos Incluídos
 
-A documentação é construída em HTML, CSS e JavaScript puros, atuando como uma referência prática e visual dos componentes e fundamentos do Design System.
+* **Calculadora de Consumo de Energia** ([Abrir no Navegador](calculadora.html)) * Uma calculadora simples utilizando um slider para simular o custo mensal de energia com base no consumo (80 a 800 kWh), a um custo fixo de R$ 0,64/kWh. Estilizada com base em um Design System ([Kaizen DS](https://app.ofabio.com.br)).
+    * Tecnologias: HTML, CSS, JavaScript.
 
-## Funcionalidades da Documentação
+* [Nome do Próximo Teste] * [Descrição breve do teste/exemplo]
+    * Tecnologias: [HTML, CSS, JavaScript, Outra?]
+    * [Abrir no Navegador](caminho/do/arquivo.html) ## Como Visualizar os Exemplos
 
-* **Fundamentos de Design:** Documentação de Cores, Tipografia, Espaçamento e Layout.
-* **Componentes:** Catálogo de componentes de UI prontos para uso (Botões, Cards, Tags, Formulários, Navegação, Grids, Links Sociais, etc.) com exemplos visuais.
-* **Visualização Interativa:** Demonstrações interativas dos componentes.
-* **Código Acessível:** Visualização do código HTML/CSS de implementação dos componentes (através das abas de Code nas demos).
-* **Diretrizes de Uso:** Informações sobre quando e como usar cada elemento do Design System (nas abas de Usage/Props).
-* **Responsividade:** O layout da documentação e os componentes são responsivos.
+Cada exemplo é tipicamente um arquivo HTML estático que pode ser aberto diretamente em um navegador web.
 
-## Tecnologias Utilizadas
-
-* **HTML5:** Estrutura da página.
-* **CSS3:** Estilização, variáveis CSS (Custom Properties) para os tokens de design.
-* **JavaScript:** Interatividade da documentação (menu mobile, abas de demo, smooth scroll).
-* **Epilogue Font:** Família tipográfica principal (via Google Fonts).
-* **Font Awesome:** Biblioteca de ícones (utilizada em alguns componentes como Links Sociais e botões).
-
-## Como Começar (Desenvolvimento Local)
-
-Para visualizar a documentação localmente no seu computador:
-
-1.  **Clone o repositório:**
+1.  **Clone este repositório:**
     ```bash
-    git clone [https://github.com/faaaabio/design-system.git](https://github.com/faaaabio/design-system.git)
+    git clone [URL_DO_SEU_REPOSITORIO]
     ```
-2.  **Navegue até a pasta do projeto:**
+    (Substitua `[URL_DO_SEU_REPOSITORIO]` pela URL HTTPS ou SSH do seu repositório no GitHub).
+2.  **Navegue até a pasta clonada:**
     ```bash
-    cd design-system
+    cd [nome-da-pasta-do-repositorio]
     ```
-3.  **Abra o arquivo `index.html` no seu navegador web preferido.** Você pode fazer isso dando um duplo clique no arquivo ou usando a função "Abrir Arquivo..." do navegador.
+3.  **Abra o arquivo HTML do exemplo desejado** (por exemplo, `calculadora.html`) no seu navegador web preferido (Chrome, Firefox, Edge, etc.).
 
-Não é necessário nenhum servidor web complexo para rodar a documentação, pois é um site estático.
+## Adicionando Novos Testes
 
-## Utilizando o Design System
+Sinta-se à vontade para adicionar novos testes e exemplos a este repositório. Crie novas pastas para organizar exemplos mais complexos ou adicione arquivos HTML diretamente na raiz para snippets simples. Lembre-se de atualizar este `README.md` descrevendo cada novo exemplo adicionado.
 
-A documentação serve como a referência principal para desenvolvedores e designers. Ao implementar novas features ou páginas para o site oFabio.com.br, consulte a documentação para identificar os componentes e padrões existentes e utilize as classes CSS e variáveis definidas.
+## Tecnologias Comuns
 
-[Opcional: Adicione instruções mais específicas se o DS for distribuído como um pacote npm, por exemplo].
+A maioria dos exemplos aqui utilizará:
 
-## Estrutura do Projeto
+* HTML
+* CSS
+* JavaScript
 
-O projeto é atualmente composto principalmente por um único arquivo HTML que contém toda a estrutura, estilos CSS e scripts JavaScript para a documentação:
+## Autor
+
+[Seu Nome ou Pseudônimo] * GitHub: [@seu_usuario](https://github.com/seu_usuario)
+* [Opcional: Link para Website/Portfólio]
+
+---
+
+Divirta-se testando e codando!
