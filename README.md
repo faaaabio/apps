@@ -15,7 +15,6 @@ Você pode acessar o design system completo aqui:
 - Espaçamentos
 - Estilo de Ícones
 - Guidelines de Responsividade
-- [SEU_CONTEUDO_ADICIONAL_AQUI]
 
 ## Aplicações Práticas
 
@@ -32,7 +31,6 @@ Exemplos reais ou demonstrações interativas que utilizam os componentes e esti
 - CSS3
 - [Divhunt](https://divhunt.com) (plataforma utilizada para desenvolvimento)
 - Figma (prototipação e documentação visual)
-- [SUAS_TECNOLOGIAS_ADICIONAIS_AQUI]
 
 ## Objetivo
 
@@ -40,18 +38,16 @@ Exemplos reais ou demonstrações interativas que utilizam os componentes e esti
 - Facilitar o desenvolvimento de novas páginas
 - Agilizar a criação de novos componentes reutilizáveis
 - Padronizar a comunicação visual
-- [SEUS_OBJETIVOS_ADICIONAIS_AQUI]
 
 ## Contribuindo
 
 Atualmente, o design system é gerenciado internamente.
 Sugestões de melhoria são sempre bem-vindas! Abra uma issue para iniciar a discussão.
-[SUAS_DIRETRIZES_DE_CONTRIBUICAO_ADICIONAIS_AQUI]
 
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
-[SUAS_INFORMACOES_DE_LICENCA_ADICIONAIS_AQUI]
+
 
 ---
 
