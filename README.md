@@ -1,16 +1,58 @@
-# Repositório de Testes e Exemplos Web
+# Kaizen Design System
 
-Este repositório serve como um espaço para experimentação (`sandbox`) e armazenamento de pequenos projetos, snippets de código e testes focados em desenvolvimento web (HTML, CSS, JavaScript).
+Este documento apresenta os componentes, padrões e diretrizes visuais que compõem o design system do site [ofabio.com.br](https://ofabio.com.br).
 
-Cada pasta ou arquivo HTML na raiz (quando aplicável) representa um teste ou exemplo específico.
+O objetivo é garantir **consistência visual** e **funcionalidade** em todas as páginas do site.
 
-## Exemplos Incluídos
+## Acesso
 
-* **Calculadora de Consumo de Energia** ([Abrir no Navegador](https://app.ofabio.com.br)) * Uma calculadora simples utilizando um slider para simular o custo mensal de energia com base no consumo (80 a 800 kWh), a um custo fixo de R$ 0,64/kWh. Estilizada com base em um Design System ([Kaizen DS](https://designsystem.ofabio.com.br)).
-    * Tecnologias: HTML, CSS, JavaScript.
+Você pode acessar o design system completo aqui:
+🔗 [https://designsystem.ofabio.com.br/](https://designsystem.ofabio.com.br/) ## Conteúdo
 
-* [Nome do Próximo Teste] * [Descrição breve do teste/exemplo]
-    * Tecnologias: [HTML, CSS, JavaScript, Outra?]
-    * [Abrir no Navegador](caminho/do/arquivo.html) ## Como Visualizar os Exemplos
+- Catálogo de Componentes
+- Padrões de Cores
+- Tipografia
+- Espaçamentos
+- Estilo de Ícones
+- Guidelines de Responsividade
+- [SEU_CONTEUDO_ADICIONAL_AQUI]
 
-Cada exemplo é tipicamente um arquivo HTML estático que pode ser aberto diretamente em um navegador web.
+## Aplicações Práticas
+
+Exemplos reais ou demonstrações interativas que utilizam os componentes e estilos do Kaizen Design System.
+
+* **Calculadora de Consumo de Energia:** [app.ofabio.com.br](https://app.ofabio.com.br/)
+    * Uma calculadora simples utilizando um slider para simular o custo de energia com base no consumo.
+* **Checkout de Serviços (WhatsApp):** [app.ofabio.com.br/checkout.html](https://app.ofabio.com.br/checkout.html)
+    * Uma página de checkout simplificada onde é possível selecionar serviços e enviar o pedido via WhatsApp.
+
+## Tecnologias Utilizadas
+
+- HTML5
+- CSS3
+- [Divhunt](https://divhunt.com) (plataforma utilizada para desenvolvimento)
+- Figma (prototipação e documentação visual)
+- [SUAS_TECNOLOGIAS_ADICIONAIS_AQUI]
+
+## Objetivo
+
+- Manter a identidade visual do site consistente
+- Facilitar o desenvolvimento de novas páginas
+- Agilizar a criação de novos componentes reutilizáveis
+- Padronizar a comunicação visual
+- [SEUS_OBJETIVOS_ADICIONAIS_AQUI]
+
+## Contribuindo
+
+Atualmente, o design system é gerenciado internamente.
+Sugestões de melhoria são sempre bem-vindas! Abra uma issue para iniciar a discussão.
+[SUAS_DIRETRIZES_DE_CONTRIBUICAO_ADICIONAIS_AQUI]
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+[SUAS_INFORMACOES_DE_LICENCA_ADICIONAIS_AQUI]
+
+---
+
+Desenvolvido por [Fábio](https://ofabio.com.br) 🚀
