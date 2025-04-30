@@ -1,20 +1,4 @@
-# Kaizen Design System
 
-Este documento apresenta os componentes, padrões e diretrizes visuais que compõem o design system do site [ofabio.com.br](https://ofabio.com.br).
-
-O objetivo é garantir **consistência visual** e **funcionalidade** em todas as páginas do site.
-
-## Acesso
-
-Você pode acessar o design system completo aqui:
-🔗 [https://designsystem.ofabio.com.br/](https://designsystem.ofabio.com.br/) ## Conteúdo
-
-- Catálogo de Componentes
-- Padrões de Cores
-- Tipografia
-- Espaçamentos
-- Estilo de Ícones
-- Guidelines de Responsividade
 
 ## Aplicações Práticas
 
