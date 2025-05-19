@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabio Lino - Contrato Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #000000;
+            --background-color: #E7E5DE;
+            --text-color: #000000;
+            --light-text: #333333;
+            --max-width: 1200px;
+            --card-bg: rgba(0, 0, 0, 0.03);
+            --card-hover: rgba(0, 0, 0, 0.05);
+
+            /* Espaçamento */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 6rem;
+            --spacing-5xl: 8rem;
+
+            /* Tipografia */
+            --text-xs: 0.75rem;
+            --text-sm: 0.9rem;
+            --text-base: 1rem;
+            --text-md: 1.1rem;
+            --text-lg: 1.2rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 2rem;
+            --text-3xl: 2.5rem;
+            --text-4xl: 3rem;
+            --text-5xl: 4.5rem;
+
+            /* Bordas */
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-full: 100px;
+        }
+
+        body {
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: -0.3px;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        h1.header-title {
+            font-size: 0; 
+            margin-bottom: 0;
+            line-height: 1;
+        }
+
+        h2.form-title { 
+            font-size: var(--text-2xl); 
+            color: var(--primary-color);
+            text-align: left;
+            font-weight: 400;
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            color: var(--light-text);
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--text-color);
+            transition: width 0.3s ease;
+        }
+
+        a:not(.btn):hover::after {
+            width: 100%;
+        }
+        
+        .main-header-wrapper { 
+            background-color: var(--background-color);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .main-header {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .header-title img {
+            height: 32px;
+            width: auto;
+        }
+
+        .form-title {
+            font-size: var(--text-sm);
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        main {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            flex-grow: 1;
+        }
+
+        .content-area {
+            width: 100%;
+        }
+
+        .card-container { 
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl); 
+            border-radius: var(--radius-md); 
+        }
+
+        .data-form-card {
+            background: white; 
+            padding: var(--spacing-2xl); 
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .data-form-card h3 {
+            font-size: var(--text-lg);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .data-form-card h4 {
+            font-size: var(--text-md);
+            color: var(--secondary-color);
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
+
+        .data-form-card p {
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--light-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .data-form-card p strong {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .data-form-card hr {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .data-form-card ul {
+            list-style-position: inside;
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .data-form-card li {
+            font-size: var(--text-base);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xs);
+            color: var(--light-text);
+        }
+
+        .contract-review-text {
+            background-color: var(--card-bg);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-top: var(--spacing-lg);
+        }
+        .contract-review-text h3 {
+            font-size: var(--text-md); 
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-lg); 
+            text-align: center;
+            font-weight: 500;
+        }
+        .contract-review-text h4 {
+            font-size: var(--text-base); 
+            color: var(--secondary-color);
+            margin-top: var(--spacing-lg); 
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+        }
+        .contract-review-text p {
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--light-text);
+            margin-bottom: var(--spacing-md);
+        }
+        .contract-review-text p strong {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        .contract-review-text hr {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin: var(--spacing-lg) 0;
+        }
+        .contract-review-text ul {
+            list-style-position: inside;
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        .contract-review-text li {
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xs);
+            color: var(--light-text);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: var(--text-sm);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid transparent;
+            font-family: 'Epilogue', sans-serif;
+            text-align: center;
+        }
+
+        .btn::after {
+            display: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .btn:active {
+            transform: translateY(0px);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-save {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid rgba(0,0,0,0.15);
+            width: auto; 
+            min-width: 100px;
+        }
+        .btn-save:hover {
+            background-color: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        .btn-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: var(--text-base);
+            width: 100%;
+            display: block;
+            border-radius: var(--radius-full);
+        }
+        .btn-footer:hover {
+            background-color: var(--secondary-color);
+        }
+        .btn-footer:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .main-footer-wrapper {
+            background-color: white;
+            width: 100%;
+            padding: 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+        }
+        .main-footer {
+             max-width: var(--max-width);
+             margin: 0 auto;
+             padding: var(--spacing-lg) var(--spacing-xl);
+        }
+
+        .terms-checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            font-size: var(--text-sm);
+            color: var(--text-color);
+        }
+        .terms-checkbox-container input[type="checkbox"] {
+            margin-right: var(--spacing-sm);
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-color);
+        }
+
+        /* Estilos para o Drawer de E-mail */
+        .email-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Overlay um pouco mais escuro */
+            display: none; 
+            justify-content: center;
+            align-items: center; /* Padrão para desktop: centralizado */
+            z-index: 1001; 
+            transition: opacity 0.3s ease; /* Transição suave para o overlay */
+            opacity: 0; /* Começa invisível para transição */
+        }
+        .email-drawer-overlay.visible { /* Classe para mostrar o drawer */
+            display: flex;
+            opacity: 1;
+        }
+
+        .email-drawer {
+            background-color: white;
+            border-radius: var(--radius-md);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            width: 90%;
+            max-width: 420px; 
+            transform: translateY(20px); /* Efeito de entrada */
+            transition: transform 0.3s ease-out;
+            display: flex; /* Para organizar header e body */
+            flex-direction: column;
+        }
+        .email-drawer-overlay.visible .email-drawer {
+            transform: translateY(0);
+        }
+        
+        .email-drawer-header { /* Novo container para título e botão fechar */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .email-drawer-header h3 {
+            font-size: var(--text-lg);
+            color: var(--primary-color);
+            margin-bottom: 0; /* Remove margem padrão do h3 */
+            font-weight: 500;
+        }
+
+        .email-drawer-header .close-drawer {
+            background: none;
+            border: none;
+            font-size: var(--text-2xl); /* Ícone de fechar maior */
+            cursor: pointer;
+            color: var(--light-text);
+            padding: var(--spacing-xs);
+            line-height: 1;
+        }
+        .email-drawer-header .close-drawer:hover {
+            color: var(--primary-color);
+        }
+        
+        .email-drawer-body { /* Container para o conteúdo principal do drawer */
+            padding: var(--spacing-lg);
+            text-align: left; /* Alinha o texto à esquerda */
+        }
+
+        .email-drawer-body p {
+            font-size: var(--text-sm);
+            color: var(--light-text);
+            margin-bottom: var(--spacing-lg);
+            text-align: center; /* Parágrafo instrutivo centralizado */
+        }
+        .email-drawer-body .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        .email-drawer-body .form-group label {
+            display: block;
+            font-size: var(--text-sm);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xs);
+            font-weight: 500;
+        }
+        .email-drawer-body .form-control {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--text-base);
+            border: 1px solid #ccc;
+            border-radius: var(--radius-sm);
+            background-color: #fff;
+            color: var(--text-color);
+        }
+         .email-drawer-body .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+        }
+        .email-drawer-body .btn-confirm-email {
+            background-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            padding: var(--spacing-md); /* Botão maior */
+            font-size: var(--text-base);
+        }
+         .email-drawer-body .btn-confirm-email:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                padding: var(--spacing-md);
+                gap: var(--spacing-xs);
+            }
+
+            .header-title img {
+                height: 24px;
+            }
+
+            .form-title {
+                font-size: var(--text-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: var(--spacing-sm);
+            }
+
+            .header-title img {
+                height: 20px;
+            }
+
+            .form-title {
+                font-size: var(--text-xs);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .header-title img {
+            height: 32px;
+            width: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-xl);
+                padding: var(--spacing-lg) 0;
+            }
+
+            .header-title img {
+                height: 24px;
+            }
+
+            .form-title {
+                font-size: var(--text-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-lg);
+                padding: var(--spacing-md) 0;
+            }
+
+            .header-title img {
+                height: 20px;
+            }
+
+            .form-title {
+                font-size: var(--text-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="content-area">
+            <div class="header-content">
+                <h1 class="header-title"><img src="https://global.divhunt.com/3e41e8f57ebbed882520a4fd1dc34dc0_1610.svg" alt="Logo Fusion Labs"></h1>
+                <h2 class="form-title">Revise o contrato</h2>
+            </div>
+            <section class="card-container data-form-card">
+                <h3>CONTRATO DE PRESTAÇÃO DE SERVIÇOS ESPECIALIZADOS</h3>
+                <p><strong>CONTRATANTE:</strong> [Nome da Empresa Contratante], inscrita no CNPJ sob o nº [CNPJ Contratante], com sede em [Endereço Completo da Contratante], neste ato representada por seu representante legal [Nome do Representante Legal], doravante denominada simplesmente "CONTRATANTE".</p>
+                <p><strong>CONTRATADO:</strong> [Razão Social do Contratado], inscrito no CNPJ sob o nº [CNPJ Contratado], com sede em [Endereço Completo do Contratado], neste ato representado por [Nome do Representante Legal], doravante denominado simplesmente "CONTRATADO".</p>
+                <p>As partes acima identificadas, doravante denominadas em conjunto "Partes" e, individualmente, "Parte", têm entre si justo e contratado o seguinte:</p>
+                <hr>
+
+                <h4>CLÁUSULA 1 - DO OBJETO</h4>
+                <p><strong>1.1.</strong> O presente contrato tem por objeto a prestação de serviços especializados em [Área de Atuação, ex: Product Design], a serem executados pelo CONTRATADO, de forma autônoma, sem subordinação, diretamente à CONTRATANTE, na função de [Função/Cargo], conforme escopo a ser definido em comum acordo entre as Partes ("Serviços").</p>
+                <p><strong>1.2.</strong> Para execução dos Serviços, o CONTRATADO indicará como executor designado a pessoa física [Nome], inscrita no CPF nº [CPF], RG nº [RG], residente à [Endereço], responsabilizando-se integralmente por sua conduta.</p>
+                <p><strong>1.3.</strong> Todas as disposições contratuais, em especial aquelas relativas à confidencialidade, propriedade intelectual, proteção de dados pessoais e não concorrência, obrigam o CONTRATADO e qualquer preposto ou terceiro por ele envolvido.</p>
+                <p><strong>1.4.</strong> O CONTRATADO declara possuir capacidade técnica, idoneidade e regularidade fiscal para a prestação dos Serviços, comprometendo-se a observar integralmente a legislação brasileira vigente.</p>
+
+                <h4>CLÁUSULA 2 - DAS CONDIÇÕES GERAIS DA CONTRATAÇÃO</h4>
+                <p><strong>2.1.</strong> A relação contratual é de natureza cívil, nos termos do art. 593 e seguintes do Código Civil, bem como da Lei nº 13.429/2017, não havendo qualquer vínculo empregatício entre as Partes.</p>
+                <p><strong>2.2.</strong> O CONTRATADO atuará com autonomia técnica e funcional, não estando sujeito à subordinação direta, controle de jornada ou regime disciplinar da CONTRATANTE.</p>
+                <p><strong>2.3.</strong> A prestação dos Serviços se dará de forma mensal, podendo ser presencial, remota ou híbrida, conforme necessidade operacional e acordo entre as Partes.</p>
+                <p><strong>2.4.</strong> Ausências justificadas por motivo de saúde superiores a [15] dias deverão ser imediatamente comunicadas. A CONTRATANTE poderá optar pela substituição do executor, pela suspensão contratual ou pela continuidade com remuneração proporcional.</p>
+                <p><strong>2.5.</strong> Será permitida ausência imotivada por até [30] dias corridos por ano, não cumulativos, limitados a [4] eventos por período de 12 meses.</p>
+                <p><strong>2.6.</strong> O CONTRATADO deverá:</p>
+                <ul>
+                    <li>Executar os Serviços com zelo, técnica e dentro dos prazos pactuados;</li>
+                    <li>Manter regularidade fiscal e tributária;</li>
+                    <li>Informar a CONTRATANTE sobre riscos e impedimentos;</li>
+                    <li>Observar as normas legais, inclusive LGPD e leis de propriedade intelectual;</li>
+                    <li>Responder por danos causados por dolo ou negligência comprovada;</li>
+                    <li>Não utilizar nome, marca ou imagem da CONTRATANTE sem autorização escrita;</li>
+                    <li>Corrigir falhas nos Serviços prestados sem custo adicional.</li>
+                </ul>
+
+                <h4>CLÁUSULA 3 - DO VALOR E FORMA DE PAGAMENTO</h4>
+                <p><strong>3.1.</strong> A CONTRATANTE pagará ao CONTRATADO a quantia mensal fixa de R$ [Valor], mediante emissão de Nota Fiscal até o dia [15] de cada mês, com pagamento até o dia [30] do mesmo mês.</p>
+                <p><strong>3.2.</strong> Após [12] meses, os valores serão reajustados anualmente conforme o Índice Nacional de Preços ao Consumidor Amplo (IPCA), salvo ajuste diferente entre as Partes.</p>
+                <p><strong>3.3.</strong> Todos os custos de execução dos Serviços (equipamentos, comunicação, tributos) são de responsabilidade do CONTRATADO. Despesas extraordinárias só serão reembolsadas mediante autorização prévia e comprovantes.</p>
+                <p><strong>3.4.</strong> Em caso de inadimplemento, incidirá multa de 2% e juros de 1% ao mês, pro rata die, sobre os valores em atraso.</p>
+                <p><strong>3.5.</strong> A CONTRATANTE poderá reter valores devidos em caso de obrigações não cumpridas, condenações judiciais ou ressarcimentos pendentes.</p>
+
+                <h4>CLÁUSULA 4 - DA VIGÊNCIA E RESCISÃO</h4>
+                <p><strong>4.1.</strong> O contrato vigorará a partir de [Data de Início], por prazo inicial de [90] dias, sendo automaticamente prorrogado por prazo indeterminado, salvo manifestação em contrário.</p>
+                <p><strong>4.2.</strong> O contrato pode ser rescindido por qualquer Parte, mediante aviso prévio de [10] dias.</p>
+                <p><strong>4.3.</strong> Poderá haver rescisão imediata em caso de:</p>
+                <ul>
+                    <li>Descumprimento contratual;</li>
+                    <li>Falência ou recuperação judicial;</li>
+                    <li>Conduta lesiva, negligência grave ou incapacidade técnica.</li>
+                </ul>
+                <p><strong>4.4.</strong> A Parte inadimplente arcará com multa contratual equivalente a [10%] do valor dos Serviços restantes, limitada a R$ [Valor Limite].</p>
+                <p><strong>4.5.</strong> Obrigações relativas à confidencialidade, propriedade intelectual e não concorrência sobrevivem ao término do contrato.</p>
+                <p><strong>4.6.</strong> O CONTRATADO colaborará com a transição dos Serviços por até [10] dias após rescisão, entregando documentos e materiais.</p>
+
+                <h4>CLÁUSULA 5 - DA CONFIDENCIALIDADE</h4>
+                <p><strong>5.1.</strong> Toda informação trocada entre as Partes, não pública, será considerada confidencial.</p>
+                <p><strong>5.2.</strong> A divulgação a terceiros dependerá de autorização expressa da Parte proprietária.</p>
+                <p><strong>5.3.</strong> Em caso de exigência legal de revelação, a Parte deverá notificar a outra previamente.</p>
+                <p><strong>5.4.</strong> A obrigação de confidencialidade subsistirá por [5] anos após o término do contrato.</p>
+                <p><strong>5.5.</strong> Descumprimento sujeita o infrator a multa de [10%] sobre o valor total contratual, limitada a R$ [Valor Limite Multa].</p>
+
+                <h4>CLÁUSULA 6 - DA PROPRIEDADE INTELECTUAL</h4>
+                <p><strong>6.1.</strong> Todo material, solução, documento ou sistema desenvolvido durante a execução dos Serviços será de propriedade exclusiva da CONTRATANTE.</p>
+                <p><strong>6.2.</strong> O CONTRATADO não deterá quaisquer direitos sobre tais criações, não podendo utilizá-las fora do âmbito deste contrato.</p>
+                <p><strong>6.3.</strong> Ferramentas, metodologias ou sistemas pré-existentes pertencentes ao CONTRATADO permanecerão sob sua titularidade.</p>
+
+                <h4>CLÁUSULA 7 - DA NÃO CONCORRÊNCIA</h4>
+                <p><strong>7.1.</strong> O CONTRATADO se compromete a não prestar serviços a empresas concorrentes da CONTRATANTE durante a vigência deste contrato e por [2] anos após seu encerramento.</p>
+                <p><strong>7.2.</strong> A não concorrência será limitada a [descrição geográfica ou setorial], sob pena de multa contratual de [10%] do valor contratual, limitada a R$ [Valor Limite].</p>
+
+                <h4>CLÁUSULA 8 - DAS DISPOSIÇÕES GERAIS</h4>
+                <p><strong>8.1.</strong> Este contrato não pode ser cedido sem anuência prévia e por escrito da outra Parte.</p>
+                <p><strong>8.2.</strong> Subcontratações serão permitidas desde que previamente aprovadas e não eximem o CONTRATADO de suas responsabilidades.</p>
+                <p><strong>8.3.</strong> Este contrato constitui o acordo integral entre as Partes, substituindo entendimentos anteriores.</p>
+                <p><strong>8.4.</strong> Qualquer alteração deverá ser feita por escrito e assinada pelas Partes.</p>
+                <p><strong>8.5.</strong> A tolerância ou omissão em exigir o cumprimento de obrigação não constitui renúncia.</p>
+                <p><strong>8.6.</strong> A nulidade de qualquer cláusula não prejudicará a validade das demais.</p>
+                <p><strong>8.7.</strong> A assinatura eletrônica será válida para todos os efeitos legais.</p>
+
+                <h4>CLÁUSULA 9 - DA LEGISLAÇÃO APLICÁVEL E FORO</h4>
+                <p><strong>9.1.</strong> Este contrato será regido pelas leis da República Federativa do Brasil.</p>
+                <p><strong>9.2.</strong> As Partes elegem o foro da Comarca de [Cidade], Estado de [Estado], com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+                <hr>
+                <p>E, por estarem assim justas e contratadas, as Partes firmam eletronicamente o presente contrato.</p>
+            </section>
+        </div>
+    </main>
+
+    <div class="main-footer-wrapper">
+        <footer class="main-footer">
+            <div class="terms-checkbox-container">
+                <input type="checkbox" id="terms-checkbox" name="terms-checkbox">
+                <label for="terms-checkbox">Li e aceito os termos do contrato.</label>
+            </div>
+            <button id="btn-continuar" class="btn btn-footer" disabled>Continuar</button>
+        </footer>
+    </div>
+
+    <div class="email-form-wrapper" style="display:none; justify-content:center; align-items:center; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:1001;">
+        <div style="background:white; border-radius:16px; padding:2rem; max-width:400px; width:90%; box-shadow:0 5px 20px rgba(0,0,0,0.25); text-align:center;">
+            <h3 style="margin-bottom:1rem;">Confirmação de E-mail</h3>
+            <form id="newsletter-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Seu melhor e-mail" required style="width:100%; padding:0.75rem; border-radius:8px; border:1px solid #ccc; margin-bottom:1rem;">
+                </div>
+                <button type="submit" style="width:100%; background:var(--primary-color); color:white; border:none; border-radius:8px; padding:0.75rem; font-size:1rem;">Confirmar e Enviar</button>
+            </form>
+            <div id="success-message" style="display:none; margin-top:1rem; color:green;">Contrato enviado! Você receberá em breve no seu e-mail.</div>
+            <button id="close-email-form" style="margin-top:1rem; background:none; border:none; color:#333; font-size:1.5rem; cursor:pointer;">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        const btnSalvar = document.getElementById('btn-salvar');
+        if (btnSalvar) {
+            btnSalvar.addEventListener('click', () => {
+                console.log('Rascunho salvo (simulação)');
+            });
+        }
+
+        const termsCheckbox = document.getElementById('terms-checkbox');
+        const btnContinuar = document.getElementById('btn-continuar');
+        const emailFormWrapper = document.querySelector('.email-form-wrapper');
+        if (termsCheckbox && btnContinuar && emailFormWrapper) {
+            termsCheckbox.addEventListener('change', () => {
+                btnContinuar.disabled = !termsCheckbox.checked;
+            });
+
+            btnContinuar.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!termsCheckbox.checked) {
+                    alert('Por favor, aceite os termos do contrato para continuar.'); 
+                    return;
+                }
+                emailFormWrapper.style.display = 'flex';
+            });
+        }
+
+        const closeEmailForm = document.getElementById('close-email-form');
+        if (closeEmailForm && emailFormWrapper) {
+            closeEmailForm.addEventListener('click', function() {
+                emailFormWrapper.style.display = 'none';
+            });
+        }
+
+        const form = document.getElementById('newsletter-form');
+        const emailInput = document.getElementById('email');
+        const successMessage = document.getElementById('success-message');
+        if (form && emailInput && successMessage) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = emailInput.value;
+                fetch("https://eonycrls1sx7r3o.m.pipedream.net", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email })
+                })
+                .then(() => {
+                    successMessage.style.display = 'block';
+                    emailInput.value = '';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
