@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Kaizen DS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ======================================== */
+        /* Kaizen Design System Base (Partial)    */
+        /* ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colors */
+            --primary-color: #000000;
+            --background-color: #E7E5DE;
+            --text-color: #000000;
+            --light-text: #333333;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-bg: rgba(0, 0, 0, 0.03);
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+
+            /* Typography */
+            --text-xs: 0.75rem;
+            --text-sm: 0.9rem;
+            --text-base: 1rem;
+            --text-lg: 1.2rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 2rem;
+
+            /* Borders */
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-full: 100px;
+        }
+
+        body {
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+            padding: var(--spacing-xl);
+        }
+
+         a { color: var(--text-color); text-decoration: none; transition: all 0.2s ease; }
+         a:hover { opacity: 0.8; }
+
+
+        /* Componentes Kaizen Utilizados */
+         h2, h3 {
+             font-weight: 400;
+             line-height: 1.1;
+             margin-bottom: var(--spacing-md);
+             font-style: normal;
+         }
+         h2 { font-size: var(--text-2xl); margin-bottom: var(--spacing-xl); }
+         h3 { font-size: var(--text-lg); margin-bottom: var(--spacing-md); }
+
+         p { margin-bottom: var(--spacing-md); }
+
+
+        .card {
+            background: var(--card-bg);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            width: 100%;
+        }
+
+        /* Botões (Estilos do Kaizen DS) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            font-weight: 400;
+            font-size: var(--text-base);
+            line-height: 1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            font-family: 'Epilogue', sans-serif;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+         .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+         .btn:active { transform: translateY(0); opacity: 0.95; }
+         .btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2); }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+         .btn-primary:hover { background-color: var(--secondary-color); }
+
+
+        /* ======================================== */
+        /* Estilos Específicos do Checkout        */
+        /* ======================================== */
+
+        .checkout-container {
+            width: 100%;
+            max-width: 900px;
+            margin: var(--spacing-2xl) auto;
+            padding: 0;
+        }
+
+        .cards-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        @media (min-width: 768px) {
+             .cards-layout {
+                 grid-template-columns: 1fr 1fr;
+             }
+         }
+
+         .products-card .card-title,
+         .cart-card .card-title {
+             margin-top: 0;
+         }
+
+
+        .product-list {
+             /* Pode adicionar padding ou margin-bottom aqui se precisar */
+        }
+
+        .product-item {
+            display: flex; /* Use flexbox */
+            align-items: center; /* Centraliza verticalmente */
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: var(--text-base);
+            gap: var(--spacing-md); /* Espaço entre checkbox e info */
+        }
+         .product-item:last-child { border-bottom: none; }
+
+
+         .product-checkbox {
+             margin: 0;
+             flex-shrink: 0;
+             /* Opcional: estilizar checkbox */
+         }
+
+
+         .product-info {
+             display: flex;
+             flex-direction: column;
+             align-items: flex-start;
+             flex-grow: 1; /* Permite que a info ocupe o espaço restante */
+         }
+
+        .product-name {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+             line-height: 1.2;
+        }
+
+        .product-price {
+             font-size: var(--text-sm);
+             color: var(--light-text);
+             margin-bottom: 0;
+         }
+
+
+        /* Input de quantidade removido - Estilos abaixo não são mais necessários */
+        /*
+        .quantity-input { ... }
+         input[type="number"]::-webkit-inner-spin-button,
+         input[type="number"]::-webkit-outer-spin-button { ... }
+          input[type="number"] { ... }
+         .product-item input[type="number"]:disabled { ... }
+        */
+
+
+        .cart-summary {
+             /* O conteúdo do resumo ficará dentro do card da direita */
+        }
+
+        .cart-summary h3 {
+             margin-bottom: var(--spacing-md);
+             margin-top: 0;
+        }
+
+
+        .cart-items-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cart-items-list li {
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--text-sm);
+            color: var(--text-color);
+        }
+
+        .cart-items-list li:last-child {
+            margin-bottom: 0;
+        }
+
+         .cart-empty-message {
+             font-size: var(--text-sm);
+             color: var(--light-text);
+         }
+
+
+        .cart-total {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+             border-top: 1px solid var(--border-color);
+        }
+
+         .cart-total span {
+              font-size: var(--text-xl);
+              font-weight: 700;
+              color: var(--primary-color);
+              margin-left: var(--spacing-xs);
+         }
+
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            margin-top: var(--spacing-xl);
+             text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Finalizar Pedido</h2>
+
+        <div class="cards-layout">
+            <div class="card products-card">
+                <h3 class="card-title">Itens Disponíveis</h3>
+                <div class="product-list" id="product-list">
+                    <p style="font-size:var(--text-sm); color:var(--light-text);">Carregando produtos...</p>
+                </div>
+            </div>
+
+            <div class="card cart-card">
+                <h3 class="card-title">Resumo do Pedido</h3>
+                 <div class="cart-summary">
+                    <ul id="cart-items-list" class="cart-items-list">
+                         <li class="cart-empty-message">Seu carrinho está vazio.</li>
+                    </ul>
+                    <div class="cart-total">
+                        Total: <span id="cart-total-value">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <button id="checkout-btn" class="btn btn-primary checkout-button">
+                    Finalizar Pedido via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === Kaizen Checkout Logic (Checkbox only) ===
+
+        // Product data (mapping IDs to name and price)
+        const productsData = {
+            'item-1': { name: 'Serviço de Consultoria Online (1h)', price: 150.00 },
+            'item-2': { name: 'Workshop Presencial (Dia)', price: 450.00 },
+            'item-3': { name: 'Pacote Design System (Base)', price: 1200.00 },
+            'item-4': { name: 'Mentoria Individual (Mês)', price: 800.00 },
+            // Add data for more products here
+        };
+
+        // Get references to elements
+        const productListDiv = document.getElementById('product-list');
+        const cartItemsListUl = document.getElementById('cart-items-list');
+        const cartTotalValueSpan = document.getElementById('cart-total-value');
+        const checkoutButton = document.getElementById('checkout-btn');
+        const cartEmptyMessage = cartItemsListUl.querySelector('.cart-empty-message');
+
+
+        // --- Populate Product List (Dynamically create HTML) ---
+        function populateProductList() {
+            productListDiv.innerHTML = ''; // Clear loading message or previous content
+
+            Object.keys(productsData).forEach(productId => {
+                const product = productsData[productId];
+
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('product-item');
+                itemDiv.dataset.productId = productId; // Link HTML item to data
+
+                const checkboxId = `checkbox-${productId}`;
+
+                itemDiv.innerHTML = `
+                    <input type="checkbox" class="product-checkbox" id="${checkboxId}" data-product-id="${productId}">
+                    <div class="product-info">
+                        <label for="${checkboxId}" class="product-name">${product.name}</label>
+                        <span class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    `;
+
+                productListDiv.appendChild(itemDiv);
+            });
+
+             // After populating, attach the main event listener to the list container
+            attachProductListListeners();
+        }
+
+         // --- Attach Event Listeners (Delegation) ---
+         function attachProductListListeners() {
+             productListDiv.addEventListener('change', function(event) {
+                 // Listen for changes on checkboxes ONLY
+                 if (event.target.classList.contains('product-checkbox')) {
+                     // When a checkbox changes, update the cart
+                     updateCart();
+                 }
+                  // Removed listener for quantity input
+             });
+         }
+
+
+        // Function to update the cart summary and total
+        function updateCart() {
+            let total = 0;
+            const itemsInCart = []; // To store items currently in the cart
+
+            // Clear the current cart display (except the empty message)
+            cartItemsListUl.querySelectorAll('li:not(.cart-empty-message)').forEach(item => item.remove());
+
+            // Iterate through product items to build the cart based on checkbox state
+            productListDiv.querySelectorAll('.product-item').forEach(itemDiv => {
+                 const checkbox = itemDiv.querySelector('.product-checkbox');
+                 const productId = itemDiv.dataset.productId;
+                 const product = productsData[productId]; // Get product data
+
+                 // >>> REVISÃO DO CÁLCULO E SELEÇÃO <<<
+                 // Apenas inclui o item se o checkbox está MARCADO
+                if (checkbox.checked && product) {
+                    const quantity = 1; // Quantidade fixa = 1
+                    const subtotal = quantity * product.price;
+                    total += subtotal;
+
+                    // Add item to the cart display list
+                    const listItem = document.createElement('li');
+                    // Exibir (x1) para clareza
+                    listItem.textContent = `${product.name} (x${quantity}) - R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                    cartItemsListUl.appendChild(listItem);
+
+                    // Store item for WhatsApp message
+                    itemsInCart.push({ name: product.name, quantity: quantity, subtotal: subtotal });
+                }
+                // >>> FIM REVISÃO <<<
+            });
+
+            // Update total display
+            cartTotalValueSpan.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+            // Show/hide empty cart message
+            if (itemsInCart.length === 0) {
+                cartEmptyMessage.style.display = 'list-item'; // Show the message
+                checkoutButton.disabled = true; // Disable button if cart is empty
+            } else {
+                cartEmptyMessage.style.display = 'none'; // Hide the message
+                checkoutButton.disabled = false; // Enable button
+            }
+
+            // Store the current cart items data in the checkout button for later use
+            checkoutButton.dataset.orderItems = JSON.stringify(itemsInCart);
+        }
+
+        // Function to generate and open the WhatsApp link
+        function generateWhatsAppLink() {
+            const orderItems = JSON.parse(checkoutButton.dataset.orderItems || '[]');
+            const orderTotal = cartTotalValueSpan.textContent;
+            const phoneNumber = '5511977777030';
+
+            if (orderItems.length === 0) {
+                alert('Selecione pelo menos um item antes de finalizar o pedido.');
+                return;
+            }
+
+            let message = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
+
+            orderItems.forEach(item => {
+                // Já usamos (x1) na lista gerada pelo updateCart
+                message += `- ${item.name} (x${item.quantity}) - R$ ${item.subtotal.toFixed(2).replace('.', ',')}\n`;
+            });
+
+            message += `\nTotal: ${orderTotal}\n\n`;
+            message += `Favor confirmar a disponibilidade e os detalhes do pagamento. Obrigado!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // --- Initial Load ---
+
+        // 1. Populate the product list HTML
+        populateProductList();
+
+        // 2. Update the cart on page load to show initial state (empty)
+        updateCart();
+
+        // 3. Attach listener to the checkout button
+         checkoutButton.addEventListener('click', generateWhatsAppLink);
+
+
+    </script>
+</body>
+</html>

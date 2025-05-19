@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Energia - Kaizen DS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ======================================== */
+        /* Kaizen Design System Base (Partial)    */
+        /* - Inclui apenas variáveis e estilos    */
+        /* necessários para esta página.        */
+        /* ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colors */
+            --primary-color: #000000;
+            --background-color: #E7E5DE;
+            --text-color: #000000;
+            --light-text: #333333;
+            --card-bg: rgba(0, 0, 0, 0.03);
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;  /* 4px */
+            --spacing-sm: 0.5rem;   /* 8px */
+            --spacing-md: 1rem;     /* 16px */
+            --spacing-lg: 1.5rem;   /* 24px */
+            --spacing-xl: 2rem;     /* 32px */
+            --spacing-2xl: 3rem;    /* 48px */
+
+            /* Typography */
+            --text-xs: 0.75rem;     /* 12px */
+            --text-sm: 0.9rem;      /* 14px */
+            --text-base: 1rem;      /* 16px */
+            --text-lg: 1.2rem;      /* 20px */
+            --text-xl: 1.5rem;      /* 24px */
+            --text-2xl: 2rem;       /* 32px */
+
+            /* Borders */
+            --radius-md: 1rem;      /* 16px */
+        }
+
+        body {
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            /* Centraliza o conteúdo na tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: var(--spacing-xl); /* Adiciona padding para telas pequenas */
+        }
+
+        /* Componentes Kaizen Utilizados */
+         h2, h3 { /* Estilo básico de títulos */
+             font-weight: 400;
+             line-height: 1.1;
+             margin-bottom: var(--spacing-md);
+             font-style: normal;
+         }
+         h2 { font-size: var(--text-2xl); margin-bottom: var(--spacing-xl); }
+         h3 { font-size: var(--text-lg); margin-bottom: var(--spacing-md); }
+
+         p { margin-bottom: var(--spacing-md); }
+
+
+        .card {
+            background: var(--card-bg);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+             max-width: 500px; /* Limita a largura do card */
+            width: 100%; /* Garante que o card ocupe a largura disponível */
+            text-align: center; /* Centraliza o texto dentro do card */
+        }
+
+        /* ======================================== */
+        /* Estilos Específicos da Calculadora     */
+        /* ======================================== */
+
+        label {
+            display: block; /* Garante que o label fique em sua própria linha */
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+            font-size: var(--text-base);
+        }
+
+        /* Estilo básico do slider */
+        input[type="range"] {
+            width: 100%; /* Ocupa a largura total do contêiner */
+            margin: var(--spacing-md) 0; /* Margem vertical */
+            -webkit-appearance: none; /* Remove estilo padrão do Chrome/Safari */
+             appearance: none;
+             background: var(--light-text); /* Cor da "trilha" do slider */
+             outline: none; /* Remove o contorno ao focar */
+             height: 6px; /* Altura da trilha */
+             border-radius: 3px; /* Bordas arredondadas da trilha */
+             cursor: pointer;
+        }
+        /* Estilo do "polegar" (thumb) do slider para Chrome/Safari */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Remove estilo padrão */
+            appearance: none;
+            width: 20px; /* Largura do polegar */
+            height: 20px; /* Altura do polegar */
+            background: var(--primary-color); /* Cor do polegar */
+            border-radius: 50%; /* Formato circular */
+            cursor: pointer; /* Cursor de mão */
+            margin-top: -7px; /* Centraliza o polegar na trilha (ajustar conforme altura da trilha) */
+             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+             transition: background-color 0.2s ease;
+        }
+         input[type="range"]::-webkit-slider-thumb:hover {
+             background-color: var(--text-color); /* Cor no hover */
+         }
+
+        /* Estilo do "polegar" (thumb) do slider para Firefox */
+         input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            /* Firefox não precisa de margin-top para centralizar */
+             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+             transition: background-color 0.2s ease;
+         }
+         input[type="range"]::-moz-range-thumb:hover {
+             background-color: var(--text-color);
+         }
+
+
+        /* Estilo para os valores de saída */
+        .calculator-output {
+            font-size: var(--text-xl);
+            font-weight: 500;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+             color: var(--primary-color); /* Cor de destaque para o resultado */
+        }
+         .calculator-output span { /* Estilo específico para o valor do custo */
+             font-size: var(--text-2xl); /* Aumenta o tamanho do valor R$ */
+             font-weight: 700; /* Deixa mais negrito */
+             color: var(--primary-color); /* Garante a cor */
+         }
+        /* Estilo para o "kWh" */
+         #consumption-value + span { /* Span logo após o consumption-value */
+             font-size: var(--text-sm);
+             color: var(--light-text);
+             margin-left: var(--spacing-xs); /* Espaço entre valor e unidade */
+         }
+
+        /* Estilo para a descrição do custo kWh */
+         .kwh-cost-info {
+             font-size: var(--text-sm);
+             color: var(--light-text);
+             margin-top: var(--spacing-md);
+         }
+
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Calculadora de Consumo</h2>
+        <p style="color: var(--light-text); font-size: var(--text-sm);">Simule o custo mensal da sua energia.</p>
+
+        <div style="margin-top: var(--spacing-xl);">
+            <label for="consumption-slider">Consumo Mensal:</label>
+            <span id="consumption-value">80</span> kWh
+            <input type="range" id="consumption-slider" min="80" max="800" value="80" step="1">
+        </div>
+
+        <div class="calculator-output">
+            Custo Estimado: <span id="estimated-cost">R$ 0,00</span>
+        </div>
+
+        <p class="kwh-cost-info">Custo por kWh: R$ 0,64</p>
+
+    </div>
+
+    <script>
+        // Obter referências para os elementos
+        const slider = document.getElementById('consumption-slider');
+        const consumptionValueSpan = document.getElementById('consumption-value');
+        const estimatedCostSpan = document.getElementById('estimated-cost');
+
+        // Custo por kWh
+        const costPerKwh = 0.64;
+
+        // Função para atualizar os valores e o cálculo
+        function updateCalculator() {
+            // Obter o valor atual do slider
+            const currentConsumption = parseInt(slider.value);
+
+            // Atualizar o texto do consumo
+            consumptionValueSpan.textContent = currentConsumption;
+
+            // Calcular o custo estimado
+            const calculatedCost = currentConsumption * costPerKwh;
+
+            // Atualizar o texto do custo estimado, formatando como moeda (R$ 0,00)
+            estimatedCostSpan.textContent = `R$ ${calculatedCost.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Adicionar listener para o evento 'input' no slider (atualiza enquanto move)
+        slider.addEventListener('input', updateCalculator);
+
+        // Chamar a função uma vez na carga da página para exibir o valor inicial
+        updateCalculator();
+
+    </script>
+    </body>
+</html>
