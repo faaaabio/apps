@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva - Bento Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bento-card {
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out forwards;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            height: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-card, .date-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover, .date-card:hover {
+            transform: translateY(-4px);
+            border-color: #22c55e;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card.selected, .date-card.selected {
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.1);
+        }
+
+        .category-card.selected:hover, .date-card.selected:hover {
+            transform: translateY(-4px);
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.15);
+        }
+
+        .sticky-content {
+            position: relative;
+            height: auto;
+            overflow-y: visible;
+            padding-bottom: 1rem;
+        }
+
+        .sticky-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sticky-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .sticky-content::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 3px;
+        }
+
+        .sticky-content::-webkit-scrollbar-thumb:hover {
+            background: #16a34a;
+        }
+
+        .sticky-summary {
+            position: sticky;
+            top: 1rem;
+            height: calc(100vh - 2rem);
+            overflow-y: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .sticky-content {
+                padding-bottom: 220px;
+            }
+
+            .sticky-summary {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                top: auto;
+                height: auto;
+                z-index: 50;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(8px);
+                border-top: 1px solid #e5e7eb;
+                box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+            }
+
+            .bento-card {
+                padding: 1rem;
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .grid-cols-7 {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+
+            .category-card, .date-card {
+                padding: 0.75rem;
+            }
+
+            .summary-content {
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .summary-content .space-y-3 {
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .summary-content .space-y-4 {
+                margin-top: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .summary-content .text-sm {
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+            }
+
+            .summary-content .text-lg {
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+
+            .summary-content .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-cols-7 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .sticky-summary {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen w-full">
+    <div class="w-full min-h-screen">
+        <div class="w-full px-8 pt-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Coluna da Esquerda -->
+                <div class="lg:col-span-7">
+                    <div class="sticky-content">
+                        <!-- Card Principal -->
+                        <div class="bento-card rounded-xl p-8 shadow-lg">
+                            <!-- Streaming e Canais -->
+                            <h2 class="text-base font-semibold text-gray-800 mb-8">Streaming e Canais</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+                                <div id="netflix" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Netflix</h3>
+                                            <p class="text-xs text-gray-500">4 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 14,98</span>
+                                    </div>
+                                </div>
+                                <div id="youtube" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">YouTube Premium</h3>
+                                            <p class="text-xs text-gray-500">4 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 12,90</span>
+                                    </div>
+                                </div>
+                                <div id="globoplay" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Globoplay</h3>
+                                            <p class="text-xs text-gray-500">4 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 12,90</span>
+                                    </div>
+                                </div>
+                                <div id="disney" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Disney+</h3>
+                                            <p class="text-xs text-gray-500">4 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 15,73</span>
+                                    </div>
+                                </div>
+                                <div id="hbo" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Max</h3>
+                                            <p class="text-xs text-gray-500">3 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 13,98</span>
+                                    </div>
+                                </div>
+                                <div id="prime" class="category-card streaming-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Prime Video</h3>
+                                            <p class="text-xs text-gray-500">3 telas</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 7,48</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Armazenamento -->
+                            <h2 class="text-base font-semibold text-gray-800 mb-8">Armazenamento</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                                <div id="vps-basico" class="category-card vps-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Básico</h3>
+                                            <p class="text-xs text-gray-500">1TB de armazenamento</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 24,90</span>
+                                    </div>
+                                </div>
+                                <div id="vps-premium" class="category-card vps-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Premium</h3>
+                                            <p class="text-xs text-gray-500">2TB de armazenamento</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 49,80</span>
+                                    </div>
+                                </div>
+                                <div id="vps-empresarial" class="category-card vps-package bg-white rounded-lg p-8 pt-10 border border-gray-200">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <h3 class="text-base font-semibold text-gray-800">Empresarial</h3>
+                                            <p class="text-xs text-gray-500">5TB de armazenamento</p>
+                                        </div>
+                                        <span class="text-emerald-600 font-semibold text-sm mt-2">R$ 124,50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo do Pedido -->
+                <div class="lg:col-span-5">
+                    <div class="bento-card rounded-xl p-8 shadow-lg sticky-summary">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-8">Resumo do Pedido</h2>
+                        <div class="space-y-8 summary-content">
+                            <!-- Streamings Selecionados -->
+                            <div id="selected-streamings" class="hidden">
+                                <div id="streaming-list" class="space-y-2">
+                                    <!-- Os itens serão inseridos aqui dinamicamente -->
+                                </div>
+                            </div>
+
+                            <!-- VPS Selecionado -->
+                            <div id="selected-vps" class="hidden">
+                                <div class="flex justify-between text-gray-500">
+                                    <span id="vps-name"></span>
+                                    <span id="vps-price">R$ 0,00</span>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-gray-200 my-8"></div>
+                            <div class="flex justify-between text-gray-800 font-semibold text-base sm:text-lg">
+                                <span>Total</span>
+                                <span id="total-value">R$ 0,00</span>
+                            </div>
+
+                            <!-- Botão para Formulário -->
+                            <div class="mt-8">
+                                <button onclick="openPaymentPopup()" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 text-center">
+                                    Continuar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Pagamento -->
+    <div id="paymentPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-8">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-lg font-semibold text-gray-800">Pagamento via PIX</h3>
+                <button onclick="closePaymentPopup()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- QR Code -->
+            <div class="mb-8 text-center">
+                <img src="qrcode.jpeg" alt="QR Code PIX" class="mx-auto mb-2">
+                <p class="text-sm text-gray-600">Escaneie o QR Code para pagar</p>
+            </div>
+
+            <!-- Código PIX -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between bg-gray-50 p-8 rounded-lg">
+                    <span class="text-sm text-gray-600">Código PIX</span>
+                    <button onclick="copyPixCode()" class="text-emerald-600 hover:text-emerald-700">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Campos de Informação -->
+            <div class="space-y-8 mb-8">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                    <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                </div>
+            </div>
+
+            <!-- Botão de Envio -->
+            <button onclick="sendToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                Enviar para WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="js/reserva.js"></script>
+</body>
+</html>
