@@ -30,8 +30,8 @@
             --text-color: #000000;
             --light-text: #333333;
             --border-color: rgba(0, 0, 0, 0.1);
-            --card-bg: rgba(0, 0, 0, 0.03);
-            --card-hover: rgba(0, 0, 0, 0.05);
+            --card-bg: #ffffff;
+            --card-hover: #f8f8f8;
             --code-bg: #F5F3EE;
             --highlight-bg: #FFFACC;
 
@@ -129,11 +129,10 @@
             top: var(--spacing-md);
             height: calc(100vh - 2rem);
             overflow-y: auto;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             background-color: var(--card-bg);
             border-radius: var(--radius-md);
             padding: var(--spacing-xl);
+            border: 1px solid var(--border-color);
         }
 
         /* Scrollbar styling */
