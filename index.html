@@ -269,6 +269,17 @@
             .category-card {
                 padding: var(--spacing-md);
             }
+
+            .copy-button {
+                padding: var(--spacing-sm);
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .copy-button svg {
+                width: 24px;
+                height: 24px;
+            }
         }
 
         /* Performance optimizations */
@@ -320,6 +331,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .copy-button:hover {
@@ -493,10 +506,10 @@
 
             <!-- Código PIX -->
             <div class="mb-6 relative">
-                <div class="flex items-center justify-between bg-gray-50 p-6 rounded-lg">
-                    <span class="text-xs text-gray-600 break-all">00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4</span>
-                    <button onclick="copyPixCode()" class="copy-button text-emerald-600 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-full p-2 ml-4 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center justify-between bg-gray-50 p-4 sm:p-6 rounded-lg">
+                    <span class="text-xs text-gray-600 break-all pr-2">00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4</span>
+                    <button onclick="copyPixCode()" class="copy-button text-emerald-600 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-full p-2 sm:p-2 ml-2 sm:ml-4 flex-shrink-0 bg-white shadow-sm">
+                        <svg class="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                         </svg>
                     </button>
