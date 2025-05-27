@@ -7,7 +7,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="./dist/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Epilogue', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         /* ============================== */
         /* 1. Geral             */
@@ -31,7 +42,7 @@
             --light-text: #333333;
             --border-color: rgba(0, 0, 0, 0.1);
             --card-bg: #ffffff;
-            --card-hover: #f8f8f8;
+            --card-hover: rgba(0, 0, 0, 0.05);
             --code-bg: #F5F3EE;
             --highlight-bg: #FFFACC;
 
@@ -129,10 +140,13 @@
             top: var(--spacing-md);
             height: calc(100vh - 2rem);
             overflow-y: auto;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             background-color: var(--card-bg);
             border-radius: var(--radius-md);
             padding: var(--spacing-xl);
             border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         /* Scrollbar styling */
@@ -221,7 +235,8 @@
                 z-index: 50;
                 background: var(--card-bg);
                 border-top: 1px solid var(--border-color);
-                padding: var(--spacing-md);
+                padding: var(--spacing-lg) var(--spacing-md);
+                box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
             }
 
             .bento-card {
@@ -244,7 +259,11 @@
             }
 
             .sticky-summary {
-                padding: var(--spacing-sm);
+                padding: var(--spacing-md);
+            }
+
+            .sticky-summary .summary-content {
+                padding-bottom: env(safe-area-inset-bottom, 0);
             }
 
             .category-card {

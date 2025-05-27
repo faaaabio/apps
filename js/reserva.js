@@ -2,6 +2,11 @@
 const PIX_CODE = "00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4";
 const WHATSAPP_NUMBER = "5511977777030";
 
+// Funções de utilidade
+function formatCurrency(value) {
+    return `R$ ${value.toFixed(2)}`;
+}
+
 // Preços dos pacotes
 const STREAMING_PACKAGES = {
     'netflix': { price: 14.98, name: 'Netflix (4 telas)' },
@@ -20,11 +25,6 @@ const VPS_PACKAGES = {
     'vps-empresarial': { price: 124.50, name: 'Empresarial (5TB)' }
 };
 
-// Função de utilidade para formatar moeda
-function formatCurrency(value) {
-    return `R$ ${value.toFixed(2)}`;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     // Estado inicial
     let selectedStreamings = new Set();
@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         nameInput: document.getElementById('name')
     };
 
-    // Funções de utilidade
     function updateSelectedItems() {
         // Atualiza Streamings
         if (elements.streamingList) {
@@ -152,13 +151,7 @@ function closePaymentPopup() {
 
 function copyPixCode() {
     navigator.clipboard.writeText(PIX_CODE).then(() => {
-        const feedback = document.querySelector('.copy-feedback');
-        if (feedback) {
-            feedback.classList.add('show');
-            setTimeout(() => {
-                feedback.classList.remove('show');
-            }, 2000);
-        }
+        alert('Código PIX copiado!');
     }).catch(err => {
         console.error('Erro ao copiar código PIX:', err);
     });
@@ -193,8 +186,7 @@ function sendToWhatsApp() {
         `*Streamings Selecionados:*\n${streamingMessage}\n` +
         `*Total Streamings:* ${streamingTotal}\n\n` +
         `*VPS:* ${selectedVPS} (${vpsPrice})\n\n` +
-        `*Total Geral:* ${total}\n\n` +
-        `*Código PIX:* ${PIX_CODE}`;
+        `*Total Geral:* ${total}`;
 
     // Codifica a mensagem e abre o WhatsApp
     const encodedMessage = encodeURIComponent(message);
