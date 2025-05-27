@@ -193,7 +193,8 @@ function sendToWhatsApp() {
         `*Streamings Selecionados:*\n${streamingMessage}\n` +
         `*Total Streamings:* ${streamingTotal}\n\n` +
         `*VPS:* ${selectedVPS} (${vpsPrice})\n\n` +
-        `*Total Geral:* ${total}`;
+        `*Total Geral:* ${total}\n\n` +
+        `*Código PIX:* ${PIX_CODE}`;
 
     // Codifica a mensagem e abre o WhatsApp
     const encodedMessage = encodeURIComponent(message);
