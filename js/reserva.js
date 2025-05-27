@@ -150,11 +150,57 @@ function closePaymentPopup() {
 }
 
 function copyPixCode() {
-    navigator.clipboard.writeText(PIX_CODE).then(() => {
-        alert('Código PIX copiado!');
-    }).catch(err => {
-        console.error('Erro ao copiar código PIX:', err);
-    });
+    const pixCode = PIX_CODE;
+    const feedback = document.querySelector('.copy-feedback');
+    
+    // Tenta copiar usando a API moderna
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(pixCode).then(() => {
+            showCopyFeedback(feedback);
+        }).catch(() => {
+            // Fallback para o método antigo
+            fallbackCopyTextToClipboard(pixCode, feedback);
+        });
+    } else {
+        // Fallback para navegadores que não suportam a API Clipboard
+        fallbackCopyTextToClipboard(pixCode, feedback);
+    }
+}
+
+function fallbackCopyTextToClipboard(text, feedback) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    
+    // Evita scroll para a área de texto
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showCopyFeedback(feedback);
+        } else {
+            alert('Não foi possível copiar o código PIX. Por favor, copie manualmente.');
+        }
+    } catch (err) {
+        console.error('Erro ao copiar:', err);
+        alert('Não foi possível copiar o código PIX. Por favor, copie manualmente.');
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function showCopyFeedback(feedback) {
+    if (feedback) {
+        feedback.classList.add('show');
+        setTimeout(() => {
+            feedback.classList.remove('show');
+        }, 2000);
+    }
 }
 
 function sendToWhatsApp() {

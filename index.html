@@ -291,7 +291,7 @@
 
         /* Feedback animations */
         .copy-feedback {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -301,11 +301,33 @@
             border-radius: var(--radius-sm);
             font-size: var(--text-sm);
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .copy-feedback.show {
             opacity: 1;
+        }
+
+        /* Melhorar o botão de copiar */
+        .copy-button {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-button:hover {
+            background-color: var(--card-hover);
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -473,13 +495,13 @@
             <div class="mb-6 relative">
                 <div class="flex items-center justify-between bg-gray-50 p-6 rounded-lg">
                     <span class="text-xs text-gray-600 break-all">00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4</span>
-                    <button onclick="copyPixCode()" class="text-emerald-600 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-full p-2 ml-4 flex-shrink-0">
+                    <button onclick="copyPixCode()" class="copy-button text-emerald-600 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-full p-2 ml-4 flex-shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                         </svg>
                     </button>
                 </div>
-                <div class="copy-feedback">Código copiado!</div>
+                <div class="copy-feedback">Código PIX copiado!</div>
             </div>
 
             <!-- Campos de Informação -->
