@@ -152,6 +152,8 @@ function closePaymentPopup() {
 function copyPixCode() {
     navigator.clipboard.writeText(PIX_CODE).then(() => {
         alert('Código PIX copiado!');
+    }).catch(err => {
+        console.error('Erro ao copiar código PIX:', err);
     });
 }
 
