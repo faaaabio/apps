@@ -1,29 +1,34 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Constantes
-    const PIX_CODE = "00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4";
-    const WHATSAPP_NUMBER = "5511977777030";
+// Constantes globais
+const PIX_CODE = "00020126580014BR.GOV.BCB.PIX0136d6bf9b9e-3742-4765-81a1-afdcb670f0805204000053039865802BR5919Fabio da Silva Lino6009SAO PAULO62140510iRzd4FqHdJ6304D3F4";
+const WHATSAPP_NUMBER = "5511977777030";
 
+// Preços dos pacotes
+const STREAMING_PACKAGES = {
+    'netflix': { price: 14.98, name: 'Netflix (4 telas)' },
+    'youtube': { price: 12.90, name: 'YouTube Premium (4 telas)' },
+    'globoplay': { price: 12.90, name: 'Globoplay (4 telas)' },
+    'disney': { price: 15.73, name: 'Disney+ (4 telas)' },
+    'hbo': { price: 13.98, name: 'Max (3 telas)' },
+    'prime': { price: 7.48, name: 'Prime Video (3 telas)' },
+    'star': { price: 45.90, name: 'Star+ (4 telas)' },
+    'paramount': { price: 29.90, name: 'Paramount+ (3 telas)' }
+};
+
+const VPS_PACKAGES = {
+    'vps-basico': { price: 24.90, name: 'Básico (1TB)' },
+    'vps-premium': { price: 49.80, name: 'Premium (2TB)' },
+    'vps-empresarial': { price: 124.50, name: 'Empresarial (5TB)' }
+};
+
+// Função de utilidade para formatar moeda
+function formatCurrency(value) {
+    return `R$ ${value.toFixed(2)}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     // Estado inicial
     let selectedStreamings = new Set();
     let selectedVPS = null;
-
-    // Preços dos pacotes
-    const STREAMING_PACKAGES = {
-        'netflix': { price: 14.98, name: 'Netflix (4 telas)' },
-        'youtube': { price: 12.90, name: 'YouTube Premium (4 telas)' },
-        'globoplay': { price: 12.90, name: 'Globoplay (4 telas)' },
-        'disney': { price: 15.73, name: 'Disney+ (4 telas)' },
-        'hbo': { price: 13.98, name: 'Max (3 telas)' },
-        'prime': { price: 7.48, name: 'Prime Video (3 telas)' },
-        'star': { price: 45.90, name: 'Star+ (4 telas)' },
-        'paramount': { price: 29.90, name: 'Paramount+ (3 telas)' }
-    };
-
-    const VPS_PACKAGES = {
-        'vps-basico': { price: 24.90, name: 'Básico (1TB)' },
-        'vps-premium': { price: 49.80, name: 'Premium (2TB)' },
-        'vps-empresarial': { price: 124.50, name: 'Empresarial (5TB)' }
-    };
 
     // Elementos do DOM
     const elements = {
@@ -38,10 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Funções de utilidade
-    function formatCurrency(value) {
-        return `R$ ${value.toFixed(2)}`;
-    }
-
     function updateSelectedItems() {
         // Atualiza Streamings
         if (elements.streamingList) {
@@ -151,7 +152,13 @@ function closePaymentPopup() {
 
 function copyPixCode() {
     navigator.clipboard.writeText(PIX_CODE).then(() => {
-        alert('Código PIX copiado!');
+        const feedback = document.querySelector('.copy-feedback');
+        if (feedback) {
+            feedback.classList.add('show');
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
+        }
     }).catch(err => {
         console.error('Erro ao copiar código PIX:', err);
     });
@@ -164,24 +171,36 @@ function sendToWhatsApp() {
         return;
     }
 
+    // Obtém os dados do localStorage
     const total = localStorage.getItem('total') || 'R$ 0,00';
     const selectedStreamings = JSON.parse(localStorage.getItem('selectedStreamings') || '[]');
     const selectedVPS = localStorage.getItem('selectedVPS') || 'Nenhum';
     const streamingTotal = localStorage.getItem('streamingTotal') || 'R$ 0,00';
     const vpsPrice = localStorage.getItem('vpsPrice') || 'R$ 0,00';
 
+    // Formata a mensagem dos streamings
     let streamingMessage = 'Nenhum';
     if (selectedStreamings.length > 0) {
-        streamingMessage = selectedStreamings.map(id => STREAMING_PACKAGES[id].name).join('\n');
+        streamingMessage = selectedStreamings.map(id => {
+            const package = STREAMING_PACKAGES[id];
+            return `• ${package.name} - ${formatCurrency(package.price)}`;
+        }).join('\n');
     }
 
-    const message = `Olá! Me chamo ${name} e gostaria de fazer uma reserva:\n\n` +
-        `Streaming:\n${streamingMessage}\nTotal Streaming: ${streamingTotal}\n\n` +
-        `VPS: ${selectedVPS} (${vpsPrice})\n\n` +
-        `Total: ${total}`;
+    // Formata a mensagem completa
+    const message = `*Nova Reserva*\n\n` +
+        `*Nome:* ${name}\n\n` +
+        `*Streamings Selecionados:*\n${streamingMessage}\n` +
+        `*Total Streamings:* ${streamingTotal}\n\n` +
+        `*VPS:* ${selectedVPS} (${vpsPrice})\n\n` +
+        `*Total Geral:* ${total}`;
 
+    // Codifica a mensagem e abre o WhatsApp
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    
+    // Fecha o popup após enviar
+    closePaymentPopup();
 }
 
 // Função para alternar a visibilidade das seções
