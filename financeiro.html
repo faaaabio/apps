@@ -1,0 +1,421 @@
+import React, { useState } from 'react';
+import { 
+  Home, 
+  TrendingUp, 
+  TrendingDown, 
+  DollarSign, 
+  CreditCard, 
+  PiggyBank, 
+  Target,
+  Calendar,
+  Plus,
+  Settings,
+  Bell,
+  User,
+  ArrowUpRight,
+  ArrowDownRight,
+  Eye,
+  EyeOff,
+  Menu,
+  X,
+  ChevronRight
+} from 'lucide-react';
+
+const FinancePlatform = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [showBalance, setShowBalance] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [transactions, setTransactions] = useState([
+    { id: 1, type: 'expense', category: 'Mercado', amount: 245.80, date: '2025-06-12', description: 'Compras supermercado' },
+    { id: 2, type: 'income', category: 'Salário', amount: 4500.00, date: '2025-06-10', description: 'Pagamento mensal' },
+    { id: 3, type: 'expense', category: 'Transporte', amount: 89.50, date: '2025-06-09', description: 'Combustível' },
+    { id: 4, type: 'expense', category: 'Lazer', amount: 125.00, date: '2025-06-08', description: 'Cinema e jantar' },
+  ]);
+
+  const [goals, setGoals] = useState([
+    { id: 1, name: 'Viagem de Férias', target: 5000, current: 2750, color: 'bg-blue-500' },
+    { id: 2, name: 'Emergência', target: 10000, current: 6800, color: 'bg-green-500' },
+    { id: 3, name: 'Carro Novo', target: 15000, current: 4200, color: 'bg-purple-500' },
+  ]);
+
+  const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+  const totalExpenses = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+  const balance = totalIncome - totalExpenses;
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(amount);
+  };
+
+  const Sidebar = () => (
+    <>
+      {/* Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div className={`fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white z-50 transform transition-transform duration-300 ease-in-out ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      } lg:translate-x-0 lg:static lg:h-screen`}>
+        <div className="p-4 border-b border-slate-700">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <Home className="w-4 h-4" />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold">FinanceCasa</h1>
+                <p className="text-slate-400 text-xs">Controle Total</p>
+              </div>
+            </div>
+            <button 
+              onClick={() => setSidebarOpen(false)}
+              className="lg:hidden p-1 hover:bg-slate-700 rounded"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        
+        <nav className="p-3 space-y-1">
+          {[
+            { id: 'dashboard', label: 'Dashboard', icon: Home },
+            { id: 'transactions', label: 'Transações', icon: CreditCard },
+            { id: 'goals', label: 'Metas', icon: Target },
+            { id: 'budget', label: 'Orçamento', icon: PiggyBank },
+            { id: 'reports', label: 'Relatórios', icon: TrendingUp },
+          ].map(item => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActiveTab(item.id);
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm ${
+                activeTab === item.id 
+                  ? 'bg-blue-600 text-white shadow-lg' 
+                  : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+              }`}
+            >
+              <item.icon className="w-4 h-4" />
+              {item.label}
+            </button>
+          ))}
+        </nav>
+        
+        <div className="absolute bottom-4 left-3 right-3">
+          <button className="w-full flex items-center gap-3 px-3 py-2.5 text-slate-300 hover:bg-slate-700 rounded-lg transition-all text-sm">
+            <Settings className="w-4 h-4" />
+            Configurações
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
+  const Header = () => (
+    <div className="bg-white shadow-sm border-b border-slate-200 p-4 flex justify-between items-center">
+      <div className="flex items-center gap-3">
+        <button 
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+        <div>
+          <h2 className="text-xl font-bold text-slate-800 capitalize">{activeTab}</h2>
+          <p className="text-slate-600 text-sm hidden sm:block">Gerencie suas finanças com inteligência</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-all">
+          <Bell className="w-5 h-5" />
+        </button>
+        <div className="hidden sm:flex items-center gap-2 bg-slate-100 rounded-lg p-2">
+          <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <User className="w-3 h-3 text-white" />
+          </div>
+          <span className="text-slate-700 font-medium text-sm">João Silva</span>
+        </div>
+      </div>
+    </div>
+  );
+
+  const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color = "blue" }) => (
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 hover:shadow-md transition-all">
+      <div className="flex items-center justify-between mb-3">
+        <div className={`w-10 h-10 bg-${color}-100 rounded-lg flex items-center justify-center`}>
+          <Icon className={`w-5 h-5 text-${color}-600`} />
+        </div>
+        {trend && (
+          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+            trend === 'up' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
+            {trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+            {trendValue}%
+          </div>
+        )}
+      </div>
+      <div>
+        <p className="text-slate-600 text-xs font-medium">{title}</p>
+        <p className="text-lg font-bold text-slate-800 mt-1">{value}</p>
+      </div>
+    </div>
+  );
+
+  const Dashboard = () => (
+    <div className="space-y-4">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <StatsCard
+          title="Saldo Total"
+          value={showBalance ? formatCurrency(balance) : "••••••"}
+          icon={DollarSign}
+          trend="up"
+          trendValue="12.5"
+          color="green"
+        />
+        <StatsCard
+          title="Receitas"
+          value={showBalance ? formatCurrency(totalIncome) : "••••••"}
+          icon={TrendingUp}
+          trend="up"
+          trendValue="8.2"
+          color="blue"
+        />
+        <StatsCard
+          title="Despesas"
+          value={showBalance ? formatCurrency(totalExpenses) : "••••••"}
+          icon={TrendingDown}
+          trend="down"
+          trendValue="3.1"
+          color="red"
+        />
+        <StatsCard
+          title="Economia"
+          value={showBalance ? formatCurrency(balance * 0.3) : "••••••"}
+          icon={PiggyBank}
+          trend="up"
+          trendValue="15.7"
+          color="purple"
+        />
+      </div>
+
+      {/* Balance Visibility Toggle */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => setShowBalance(!showBalance)}
+          className="flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-all text-sm"
+        >
+          {showBalance ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          <span className="hidden sm:inline">{showBalance ? 'Ocultar valores' : 'Mostrar valores'}</span>
+        </button>
+      </div>
+
+      {/* Recent Transactions */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold text-slate-800">Transações Recentes</h3>
+          <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">Ver todas</button>
+        </div>
+        <div className="space-y-3">
+          {transactions.slice(0, 4).map(transaction => (
+            <div key={transaction.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-all">
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                  transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                }`}>
+                  {transaction.type === 'income' ? 
+                    <TrendingUp className="w-4 h-4 text-green-600" /> : 
+                    <TrendingDown className="w-4 h-4 text-red-600" />
+                  }
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-slate-800 text-sm truncate">{transaction.category}</p>
+                  <p className="text-slate-600 text-xs truncate">{transaction.description}</p>
+                </div>
+              </div>
+              <div className="text-right flex-shrink-0 ml-2">
+                <p className={`font-semibold text-sm ${
+                  transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
+                </p>
+                <p className="text-slate-500 text-xs">{new Date(transaction.date).toLocaleDateString('pt-BR')}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Goals Progress */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold text-slate-800">Metas Financeiras</h3>
+          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm">
+            <Plus className="w-4 h-4" />
+            <span className="hidden sm:inline">Nova Meta</span>
+          </button>
+        </div>
+        <div className="space-y-4">
+          {goals.map(goal => {
+            const progress = (goal.current / goal.target) * 100;
+            return (
+              <div key={goal.id} className="bg-slate-50 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-3">
+                  <h4 className="font-medium text-slate-800 text-sm">{goal.name}</h4>
+                  <span className="text-sm text-slate-600">{Math.round(progress)}%</span>
+                </div>
+                <div className="w-full bg-slate-200 rounded-full h-2 mb-3">
+                  <div 
+                    className={`${goal.color} h-2 rounded-full transition-all duration-500`}
+                    style={{ width: `${Math.min(progress, 100)}%` }}
+                  ></div>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-slate-600">{formatCurrency(goal.current)}</span>
+                  <span className="text-slate-800 font-medium">{formatCurrency(goal.target)}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+
+  const TransactionsView = () => (
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold text-slate-800">Todas as Transações</h3>
+        <div className="flex gap-2">
+          <button className="px-3 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-all text-sm">
+            Filtrar
+          </button>
+          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-sm">
+            <Plus className="w-4 h-4" />
+            <span className="hidden sm:inline">Nova</span>
+          </button>
+        </div>
+      </div>
+      
+      {/* Mobile Card View */}
+      <div className="block sm:hidden space-y-3">
+        {transactions.map(transaction => (
+          <div key={transaction.id} className="bg-slate-50 rounded-lg p-3">
+            <div className="flex justify-between items-start mb-2">
+              <div className="flex items-center gap-2">
+                <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                  transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                }`}>
+                  {transaction.type === 'income' ? 
+                    <TrendingUp className="w-3 h-3 text-green-600" /> : 
+                    <TrendingDown className="w-3 h-3 text-red-600" />
+                  }
+                </div>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  transaction.type === 'income' 
+                    ? 'bg-green-100 text-green-700' 
+                    : 'bg-red-100 text-red-700'
+                }`}>
+                  {transaction.type === 'income' ? 'Receita' : 'Despesa'}
+                </span>
+              </div>
+              <p className={`font-semibold text-sm ${
+                transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+              }`}>
+                {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
+              </p>
+            </div>
+            <div>
+              <p className="font-medium text-slate-800 text-sm">{transaction.category}</p>
+              <p className="text-slate-600 text-xs">{transaction.description}</p>
+              <p className="text-slate-500 text-xs mt-1">
+                {new Date(transaction.date).toLocaleDateString('pt-BR')}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden sm:block overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-slate-200">
+              <th className="text-left py-3 px-4 font-medium text-slate-600 text-sm">Data</th>
+              <th className="text-left py-3 px-4 font-medium text-slate-600 text-sm">Categoria</th>
+              <th className="text-left py-3 px-4 font-medium text-slate-600 text-sm">Descrição</th>
+              <th className="text-left py-3 px-4 font-medium text-slate-600 text-sm">Tipo</th>
+              <th className="text-right py-3 px-4 font-medium text-slate-600 text-sm">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map(transaction => (
+              <tr key={transaction.id} className="border-b border-slate-100 hover:bg-slate-50">
+                <td className="py-3 px-4 text-slate-800 text-sm">
+                  {new Date(transaction.date).toLocaleDateString('pt-BR')}
+                </td>
+                <td className="py-3 px-4 text-slate-800 text-sm">{transaction.category}</td>
+                <td className="py-3 px-4 text-slate-600 text-sm">{transaction.description}</td>
+                <td className="py-3 px-4">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    transaction.type === 'income' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-red-100 text-red-700'
+                  }`}>
+                    {transaction.type === 'income' ? 'Receita' : 'Despesa'}
+                  </span>
+                </td>
+                <td className={`py-3 px-4 text-right font-medium text-sm ${
+                  transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'transactions':
+        return <TransactionsView />;
+      case 'goals':
+        return <div className="text-center py-12 text-slate-600">Seção de Metas em desenvolvimento</div>;
+      case 'budget':
+        return <div className="text-center py-12 text-slate-600">Seção de Orçamento em desenvolvimento</div>;
+      case 'reports':
+        return <div className="text-center py-12 text-slate-600">Seção de Relatórios em desenvolvimento</div>;
+      default:
+        return <Dashboard />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <div className="lg:flex">
+        <Sidebar />
+        <div className="flex-1 lg:ml-0">
+          <Header />
+          <main className="p-3 sm:p-4 lg:p-6">
+            {renderContent()}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FinancePlatform;
